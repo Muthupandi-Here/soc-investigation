@@ -1,0 +1,83 @@
+# 001 - Suspicious PowerShell Script Execution
+
+## Alert Information
+
+| Field | Details |
+|---|---|
+| Alert | Suspicious PowerShell Script Executed |
+| Severity | Medium |
+| Host | 172.16.17.206 |
+| File | payload_1.ps1 |
+| Platform | LetsDefend |
+
+## Initial Analysis
+
+A suspicious PowerShell script execution alert was generated.
+The script was located in the user's Downloads directory.
+
+## Investigation
+
+### 1. File Analysis
+
+The PowerShell payload was investigated using VirusTotal.
+
+The sample was detected by multiple security vendors, indicating
+that the file was potentially malicious.
+
+### 2. Threat Intelligence
+
+The investigation identified:
+
+- Domain: kionagranada.com
+- IP: 161.22.46.148
+- Port: 443
+
+### 3. SIEM / Firewall Investigation
+
+Firewall logs were searched for communication involving the
+affected host.
+
+A connection was identified from:
+
+Source:
+172.16.17.206
+
+Destination:
+161.22.46.148:443
+
+This confirmed communication between the affected host and the
+identified malicious infrastructure.
+
+## MITRE ATT&CK
+
+- T1059.001 - PowerShell
+- T1204.002 - Malicious File
+
+## Artifacts
+
+| Type | Value |
+|---|---|
+| Host IP | 172.16.17.206 |
+| C2 IP | 161.22.46.148 |
+| Domain | kionagranada.com |
+| File | payload_1.ps1 |
+
+## Verdict
+
+**True Positive - Malicious PowerShell Activity**
+
+The investigation confirmed malicious PowerShell execution and
+communication with identified malicious infrastructure.
+
+## Recommended Response
+
+- Isolate the affected endpoint.
+- Block identified malicious infrastructure.
+- Remove the malicious payload.
+- Search the environment for the identified IOCs.
+- Investigate for persistence or additional payloads.
+
+## What I Learned
+
+This investigation helped me understand how to correlate malware
+analysis results with firewall/SIEM logs to confirm C2 communication.
