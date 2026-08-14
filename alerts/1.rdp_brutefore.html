@@ -1,1 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Day 01 - RDP Brute Force Investigation</title>
+
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="container">
+
+        <p>DAY 01 • SOC ALERT INVESTIGATION</p>
+
+        <h1>RDP Brute Force Detection</h1>
+
+        <p>Security Operations Center Lab</p>
+
+    </div>
+</header>
+
+
+<main class="container">
+
+    <!-- Alert Overview -->
+
+    <section class="intro">
+
+        <h2>🚨 Alert Overview</h2>
+
+        <div class="stat-card">
+
+            <h3>MEDIUM</h3>
+
+            <p>Severity</p>
+
+            <br>
+
+            <p>
+                <strong>Rule:</strong>
+                SOC176 - RDP Brute Force Detected
+            </p>
+
+            <p>
+                <strong>Alert Type:</strong>
+                Brute Force
+            </p>
+
+            <p>
+                <strong>Protocol:</strong>
+                RDP
+            </p>
+
+            <p>
+                <strong>Event ID:</strong>
+                234
+            </p>
+
+            <p>
+                <strong>Firewall Action:</strong>
+                Allowed
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Investigation Summary -->
+
+    <section class="intro">
+
+        <h2>🔍 Investigation Summary</h2>
+
+        <p>
+            An RDP brute-force alert was generated after multiple
+            failed authentication attempts were observed from a
+            single external source.
+        </p>
+
+        <p>
+            Different and non-existing accounts were targeted.
+            Further investigation identified a successful RDP
+            authentication following the failed attempts.
+        </p>
+
+    </section>
+
+
+    <!-- Source Information -->
+
+    <section class="intro">
+
+        <h2>🌐 Source & Destination</h2>
+
+        <div class="stat-card">
+
+            <p>
+                <strong>Source IP:</strong>
+                218.92.0.56
+            </p>
+
+            <p>
+                <strong>Source Classification:</strong>
+                External
+            </p>
+
+            <p>
+                <strong>Destination Host:</strong>
+                Matthew
+            </p>
+
+            <p>
+                <strong>Destination IP:</strong>
+                172.16.17.148
+            </p>
+
+            <p>
+                <strong>Protocol:</strong>
+                RDP
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- IP Reputation -->
+
+    <section class="intro">
+
+        <h2>🛡️ IP Reputation Check</h2>
+
+        <div class="stat-card">
+
+            <p>
+                <strong>Platform:</strong>
+                VirusTotal
+            </p>
+
+            <p>
+                <strong>Detection:</strong>
+                8 / 91
+            </p>
+
+            <p>
+                <strong>Assessment:</strong>
+                Suspicious
+            </p>
+
+        </div>
+
+        <p>
+            The source IP was classified as an external address.
+            VirusTotal showed detections from multiple security
+            vendors. This result was treated as supporting evidence
+            and correlated with the authentication activity.
+        </p>
+
+    </section>
+
+
+    <!-- Authentication Investigation -->
+
+    <section class="intro">
+
+        <h2>🔐 Authentication Investigation</h2>
+
+        <div class="stat-card">
+
+            <p>
+                Multiple failed RDP authentication attempts
+                were observed.
+            </p>
+
+            <br>
+
+            <p>
+                The attempts targeted different/non-existing
+                accounts.
+            </p>
+
+            <br>
+
+            <p>
+                A successful RDP authentication was subsequently
+                identified.
+            </p>
+
+        </div>
+
+        <p>
+            The sequence of repeated failed authentication attempts
+            followed by successful authentication is consistent
+            with potential brute-force activity resulting in
+            unauthorized access.
+        </p>
+
+    </section>
+
+
+    <!-- MITRE -->
+
+    <section class="intro">
+
+        <h2>🎯 MITRE ATT&CK</h2>
+
+        <div class="tags">
+
+            <span>T1110 - Brute Force</span>
+
+            <span>T1078 - Valid Accounts</span>
+
+            <span>T1087 - Account Discovery</span>
+
+        </div>
+
+    </section>
+
+
+    <!-- Artifacts -->
+
+    <section class="intro">
+
+        <h2>🧩 Artifacts</h2>
+
+        <div class="stat-card">
+
+            <p>
+                <strong>Source IP:</strong>
+                218.92.0.56
+            </p>
+
+            <p>
+                <strong>Destination Host:</strong>
+                Matthew
+            </p>
+
+            <p>
+                <strong>Destination IP:</strong>
+                172.16.17.148
+            </p>
+
+            <p>
+                <strong>Protocol:</strong>
+                RDP
+            </p>
+
+            <p>
+                <strong>Event ID:</strong>
+                234
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Analyst Note -->
+
+    <section class="intro">
+
+        <h2>📝 Analyst Note</h2>
+
+        <div class="stat-card">
+
+            <p>
+                Investigated an RDP brute-force alert originating
+                from an external source. Multiple failed
+                authentication attempts were observed against
+                different/non-existing accounts.
+            </p>
+
+            <br>
+
+            <p>
+                The source IP returned 8/91 detections in VirusTotal,
+                indicating suspicious reputation.
+            </p>
+
+            <br>
+
+            <p>
+                Further investigation identified a successful RDP
+                authentication following the failed attempts.
+                The sequence is consistent with potential
+                brute-force activity resulting in successful
+                authentication.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Verdict -->
+
+    <section class="intro">
+
+        <h2>🚨 Final Verdict</h2>
+
+        <div class="stat-card">
+
+            <h3>TRUE POSITIVE</h3>
+
+            <p>
+                The alert was classified as a True Positive based
+                on the combination of repeated failed authentication,
+                external source activity, suspicious IP reputation,
+                and subsequent successful RDP authentication.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Response -->
+
+    <section class="intro">
+
+        <h2>🛡️ Recommended Response</h2>
+
+        <div class="stat-card">
+
+            <ul>
+                <li>Investigate the successful RDP session.</li>
+
+                <li>Review activity performed after authentication.</li>
+
+                <li>Identify the authenticated account.</li>
+
+                <li>Review related Windows security events.</li>
+
+                <li>Investigate or block the source IP according to SOC policy.</li>
+
+                <li>Reset credentials if compromise is confirmed.</li>
+            </ul>
+
+        </div>
+
+    </section>
+
+
+    <!-- Evidence -->
+
+    <section class="intro">
+
+        <h2>📸 Investigation Evidence</h2>
+
+        <p>Alert Details</p>
+
+        <img
+            src="../images/day-01/alert-details.png"
+            alt="RDP brute force alert details"
+            style="max-width:100%; border-radius:10px;"
+        >
+
+        <br><br>
+
+        <p>Source IP Enrichment</p>
+
+        <img
+            src="../images/day-01/enrichment.png"
+            alt="Source IP enrichment"
+            style="max-width:100%; border-radius:10px;"
+        >
+
+        <br><br>
+
+        <p>IP Reputation</p>
+
+        <img
+            src="../images/day-01/ip-reputation.png"
+            alt="VirusTotal IP reputation"
+            style="max-width:100%; border-radius:10px;"
+        >
+
+    </section>
+
+
+    <!-- Back -->
+
+    <section class="intro">
+
+        <a href="../index.html"
+           style="color:#38bdf8; text-decoration:none;">
+
+            ← Back to SOC Dashboard
+
+        </a>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <p>
+        SOC Investigation Portfolio | Day 01
+    </p>
+
+</footer>
+
+</body>
+
+</html>
